@@ -1,0 +1,14 @@
+# Use a imagem oficial do MongoDB como base
+FROM mongo:latest
+
+# Copie o arquivo de inicialização do MongoDB para o diretório raiz
+COPY mongo-init.js /docker-entrypoint-initdb.d/
+
+# Defina a variável de ambiente para a string de conexão do MongoDB
+ENV MONGO_INITDB_CONNECTION_STRING mongodb://localhost:27017/mydb
+
+# Exponha a porta padrão do MongoDB
+EXPOSE 27017
+
+# Inicie o MongoDB quando o contêiner for iniciado
+CMD ["mongod"]

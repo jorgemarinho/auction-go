@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func (bd *BidRepository) FindByIdAuctionId(
+func (bd *BidRepository) FindBidByAuctionId(
 	ctx context.Context,
 	auctionId string) ([]bid_entity.Bid, *internal_error.InternalError) {
 
@@ -45,7 +45,7 @@ func (bd *BidRepository) FindByIdAuctionId(
 	return bidEntities, nil
 }
 
-func (bd *BidRepository) FindWinningBiAuctionId(
+func (bd *BidRepository) FindWinningBidByAuctionId(
 	ctx context.Context,
 	auctionId string) (*bid_entity.Bid, *internal_error.InternalError) {
 

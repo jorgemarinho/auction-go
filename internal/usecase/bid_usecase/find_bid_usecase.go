@@ -6,11 +6,11 @@ import (
 	"github.com/jorgemarinho/auction-go/internal/internal_error"
 )
 
-func (bu *BidUseCase) FindByIdAuctionId(
+func (bu *BidUseCase) FindBidByAuctionId(
 	ctx context.Context,
 	auctionId string) ([]BidOutputDTO, *internal_error.InternalError) {
 
-	bidList, err := bu.BidRepository.FindByIdAuctionId(ctx, auctionId)
+	bidList, err := bu.BidRepository.FindBidByAuctionId(ctx, auctionId)
 
 	if err != nil {
 		return nil, err
@@ -31,11 +31,11 @@ func (bu *BidUseCase) FindByIdAuctionId(
 	return bidOutputList, nil
 }
 
-func (bu *BidUseCase) FindWinningBiAuctionId(
+func (bu *BidUseCase) FindWinningBidByAuctionId(
 	ctx context.Context,
 	auctionId string) (*BidOutputDTO, *internal_error.InternalError) {
 
-	bidEntity, err := bu.BidRepository.FindWinningBiAuctionId(ctx, auctionId)
+	bidEntity, err := bu.BidRepository.FindWinningBidByAuctionId(ctx, auctionId)
 
 	if err != nil {
 		return nil, err

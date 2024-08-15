@@ -7,6 +7,12 @@ import (
 	"github.com/jorgemarinho/auction-go/internal/internal_error"
 )
 
+func NewUserUseCase(userRepository user_entity.UserRepositoryInterface) UserUseCaseInterface {
+	return &UserUseCase{
+		UserRepository: userRepository,
+	}
+}
+
 type UserUseCase struct {
 	UserRepository user_entity.UserRepositoryInterface
 }
@@ -17,13 +23,13 @@ type UserOutputDTO struct {
 }
 
 type UserUseCaseInterface interface {
-	FindUserByID(
+	FindUserById(
 		ctx context.Context,
 		id string) (*UserOutputDTO, *internal_error.InternalError)
 }
 
-func (u *UserUseCase) FindUserByID(ctx context.Context, id string) (*UserOutputDTO, *internal_error.InternalError) {
-	userEntity, err := u.UserRepository.FindUserByID(ctx, id)
+func (u *UserUseCase) FindUserById(ctx context.Context, id string) (*UserOutputDTO, *internal_error.InternalError) {
+	userEntity, err := u.UserRepository.FindUserById(ctx, id)
 	if err != nil {
 		return nil, err
 	}

@@ -48,7 +48,7 @@ type BidEntityRepository interface {
 		ctx context.Context,
 		bidEntities []Bid) *internal_error.InternalError
 
-	FindByIdAuctionId(
+	FindBidByAuctionId(
 		ctx context.Context,
 		auctionId string) ([]Bid, *internal_error.InternalError)
 

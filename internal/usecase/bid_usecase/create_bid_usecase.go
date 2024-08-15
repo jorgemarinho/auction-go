@@ -58,11 +58,11 @@ type BidUseCaseInterface interface {
 		ctx context.Context,
 		bidInputDTO BidInputDTO) *internal_error.InternalError
 
-	FindWinningBiAuctionId(
+	FindWinningBidByAuctionId(
 		ctx context.Context,
 		auctionId string) (*BidOutputDTO, *internal_error.InternalError)
 
-	FindByIdAuctionId(
+	FindBidByAuctionId(
 		ctx context.Context,
 		auctionId string) ([]BidOutputDTO, *internal_error.InternalError)
 }

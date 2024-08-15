@@ -28,8 +28,8 @@ type AuctionOutputDTO struct {
 }
 
 type WinningInfoOutpuDTO struct {
-	Auction AuctionOutputDTO `json:"auction"`
-	Bid *bid_usecase.BidOutputDTO `json:"bid,omitempty"`
+	Auction AuctionOutputDTO          `json:"auction"`
+	Bid     *bid_usecase.BidOutputDTO `json:"bid,omitempty"`
 }
 
 func NewAuctionUseCase(
@@ -37,7 +37,7 @@ func NewAuctionUseCase(
 	bidRepository bid_entity.BidEntityRepository) AuctionUseCaseInterface {
 	return &AuctionUseCase{
 		auctionRepositoryInterface: auctionRepository,
-		bidRepositoryInterface: bidRepository,
+		bidRepositoryInterface:     bidRepository,
 	}
 }
 
@@ -46,13 +46,13 @@ type AuctionUseCaseInterface interface {
 		ctx context.Context,
 		auctionInput AuctionInputDTO) *internal_error.InternalError
 
-	FindAuctionById(ctx context.Context, id string) (*AuctionOutputDTO, *internal_error.InternalError)	
+	FindAuctionById(ctx context.Context, id string) (*AuctionOutputDTO, *internal_error.InternalError)
 
 	FindAuctions(
 		ctx context.Context,
 		status AuctionStatus,
 		category string,
-		productName string) ([]AuctionOutputDTO, *internal_error.InternalError) 
+		productName string) ([]AuctionOutputDTO, *internal_error.InternalError)
 
 	FindWinningBidByAuctionId(
 		ctx context.Context,
@@ -64,7 +64,7 @@ type AuctionStatus int64
 
 type AuctionUseCase struct {
 	auctionRepositoryInterface auction_entity.AuctionRepositoryInterface
-	bidRepositoryInterface bid_entity.BidEntityRepository
+	bidRepositoryInterface     bid_entity.BidEntityRepository
 }
 
 func (au *AuctionUseCase) CreateAuction(
@@ -74,7 +74,7 @@ func (au *AuctionUseCase) CreateAuction(
 		auctionInput.ProductName,
 		auctionInput.Category,
 		auctionInput.Description,
-		auction_entity.ProductCondition(auctionInput.Condition)
+		auction_entity.ProductCondition(auctionInput.Condition),
 	)
 
 	if err != nil {
@@ -87,4 +87,5 @@ func (au *AuctionUseCase) CreateAuction(
 		return err
 	}
 
+	return nil
 }

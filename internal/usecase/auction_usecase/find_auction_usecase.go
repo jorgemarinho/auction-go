@@ -54,7 +54,7 @@ func (au *AuctionUseCase) FindAuctions(
 	return auctionOutputs, nil
 }
 
-func (au *AuctionUseCase) FindWinningBiByAuctionId(
+func (au *AuctionUseCase) FindWinningBidByAuctionId(
 	ctx context.Context,
 	auctionId string) (*WinningInfoOutpuDTO, *internal_error.InternalError) {
 	auction, err := au.auctionRepositoryInterface.FindAuctionById(ctx, auctionId)
@@ -72,7 +72,7 @@ func (au *AuctionUseCase) FindWinningBiByAuctionId(
 		Timestamp:   auction.Timestamp,
 	}
 
-	bidWinning, err := au.bidRepositoryInterface.FindWinningBiByAuctionId(ctx, auction.Id)
+	bidWinning, err := au.bidRepositoryInterface.FindWinningBidByAuctionId(ctx, auction.Id)
 
 	if err != nil {
 		return &WinningInfoOutpuDTO{

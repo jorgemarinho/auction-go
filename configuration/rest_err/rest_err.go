@@ -1,6 +1,10 @@
 package rest_err
 
-import "net/http"
+import (
+	"net/http"
+
+	"github.com/jorgemarinho/auction-go/internal/internal_error"
+)
 
 type RestErr struct {
 	Message string   `json:"message"`
@@ -16,6 +20,17 @@ type Causes struct {
 
 func (r *RestErr) Error() string {
 	return r.Message
+}
+
+func ConvertError(internal_error *internal_error.InternalError) *RestErr {
+	switch internal_error.Err {
+	case "bad_request":
+		return NewBadRequestError(internal_error.Error())
+	case "not_found":
+		return NewNotFoundError(internal_error.Error())
+	default:
+		return NewInternalServerError(internal_error.Error())
+	}
 }
 
 func NewBadRequestError(message string, causes ...Causes) *RestErr {

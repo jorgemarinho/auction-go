@@ -24,6 +24,7 @@ func (u *AuctionController) CreateAuction(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&auctionInputDTO); err != nil {
 		restErr := validation.ValidateErr(err)
+
 		c.JSON(restErr.Code, restErr)
 		return
 	}
@@ -31,8 +32,10 @@ func (u *AuctionController) CreateAuction(c *gin.Context) {
 	err := u.auctionUseCase.CreateAuction(context.Background(), auctionInputDTO)
 	if err != nil {
 		restErr := validation.ValidateErr(err)
+
 		c.JSON(restErr.Code, restErr)
 		return
 	}
+
 	c.Status(http.StatusCreated)
 }

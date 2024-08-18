@@ -14,15 +14,19 @@ services:
     networks:
       - localNetwork
   mongodb:
-    image: mongo
-    restart: always
+    build: .docker/mongodb
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: auctions
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - ./.docker/dbdata:/data/db
     networks:
       - localNetwork
 
-  networks:
+networks:
   localNetwork:
     driver: bridge

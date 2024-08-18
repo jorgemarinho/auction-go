@@ -23,8 +23,8 @@ func main() {
 
 	ctx := context.Background()
 
-	if err := godotenv.Load(".env"); err != nil {
-		log.Fatal("Error loading .env file")
+	if err := godotenv.Load("cmd/auction/.env"); err != nil {
+		log.Fatalf("Error loading .env file: %v", err)
 		return
 	}
 
@@ -39,10 +39,16 @@ func main() {
 
 	userController, bidController, auctionController := initDependecies(databaseConnection)
 
-	router.GET("/auctions", auctionController.FindAuctions)
-	router.GET("/auctions/:auctionId", auctionController.FindAuctionById)
-	router.GET("/auctions/winner/:auctionId", auctionController.FindWinningBidByAuctionId)
-	router.POST("/auctions", auctionController.CreateAuction)
+	router.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "welcome to auction api",
+		})
+	})
+
+	router.GET("/auction", auctionController.FindAuctions)
+	router.GET("/auction/:auctionId", auctionController.FindAuctionById)
+	router.GET("/auction/winner/:auctionId", auctionController.FindWinningBidByAuctionId)
+	router.POST("/auction", auctionController.CreateAuction)
 	router.POST("/bid", bidController.CreateBid)
 	router.GET("/bid/:auctionId", bidController.FindBidAuctionById)
 	router.GET("/user/:userId", userController.FindUserById)

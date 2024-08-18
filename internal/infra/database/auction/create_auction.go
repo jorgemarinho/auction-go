@@ -2,6 +2,7 @@ package auction
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"time"
 
@@ -52,6 +53,8 @@ func (ar *AuctionRepository) CreateAuction(
 
 	_, err := ar.Collection.InsertOne(ctx, auctionEntityMongo)
 	if err != nil {
+
+		fmt.Println("Error trying to create auction:", err)
 		return internal_error.NewInternalServerError("Error trying to create auction")
 	}
 

@@ -37,6 +37,10 @@ Este é um sistema de leilões desenvolvido em Go. O sistema permite criar leil�
 
    A aplicação estará disponível em `http://localhost:8080`.
 
+//precisa criar usuario
+//preicsa criar o leilao
+//precisar criar o bid
+
 ### Exemplos de Requisição
 
 - **Para criar leilão:**
@@ -45,9 +49,9 @@ Este é um sistema de leilões desenvolvido em Go. O sistema permite criar leil�
    curl -X POST http://localhost:8080/auction \
    -H "Content-Type: application/json" \
    -d '{
-        "product_name": "Pet Bed",
-        "category": "Pet Supplies",
-        "description": "A cozy bed for your pet",
+        "product_name": "Nintendo 64",
+        "category": "Video Game",
+        "description": "video game da nintendo com 64 bits",
         "condition": 1
        }'
    ```
@@ -62,7 +66,7 @@ Este é um sistema de leilões desenvolvido em Go. O sistema permite criar leil�
 - **Para buscar leilões por parâmetros de consulta:**
 
    ```sh
-   curl -X GET "http://localhost:8080/auction?category=Pet%20Supplies&condition=1&status=0" \
+   curl -X GET "http://localhost:8080/auction?category=Video%Game&condition=1&status=0" \
    -H "Content-Type: application/json"
    ```
    

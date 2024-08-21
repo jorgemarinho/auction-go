@@ -37,10 +37,6 @@ Este é um sistema de leilões desenvolvido em Go. O sistema permite criar leil�
 
    A aplicação estará disponível em `http://localhost:8080`.
 
-//precisa criar usuario
-//preicsa criar o leilao
-//precisar criar o bid
-
 ### Exemplos de Requisição
 
 - **Para criar leilão:**
@@ -69,20 +65,3 @@ Este é um sistema de leilões desenvolvido em Go. O sistema permite criar leil�
    curl -X GET "http://localhost:8080/auction?category=Video%Game&condition=1&status=0" \
    -H "Content-Type: application/json"
    ```
-   
-   Subir o serviço docker, caso não esteja iniciado
-
-service docker start
-
-Primeira vez, fazer um build
-
-docker-compose up --build 
-
-Outras vezes
-
-docker-compose up -d
-
-
-
-
-docker container run -d -p 27017:27017 name auctionDB mongo
